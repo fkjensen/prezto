@@ -11,3 +11,31 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+#
+# keyboard macros
+#
+bindkey "^Xt" insert-iso8601-datetime
+bindkey "^Xd" insert-iso8600-date
+bindkey "^Xs" prepend-sudo
+
+function insert-iso8601-date {
+  ISO8601=$( date +"%Y%m%d" )
+  BUFFER="$LBUFFER$ISO8601$RBUFFER"
+}
+
+function insert-iso8601-datetime {
+  ISO8601=$( date +"%Y%m%d%H%M%S" )
+  BUFFER="$LBUFFER$ISO8601$RBUFFER"
+}
+
+function prepend-sudo {
+  if [[ $BUFFER != "sudo "* ]]; then
+    BUFFER="sudo $BUFFER"; CURSOR+=5
+  fi
+}
+
+zle -N prepend-sudo
+zle -N insert-iso8601-date
+zle -N insert-iso8601-datetime
+
