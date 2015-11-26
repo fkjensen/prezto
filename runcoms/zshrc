@@ -12,11 +12,20 @@ fi
 
 # Customize to your needs...
 
+function light {
+  echo -en "\033]50;SetProfile=SolarizedLight\a"
+}
+
+function dark {
+  echo -en "\033]50;SetProfile=SolarizedDark\a"
+}
+
+
 #
 # keyboard macros
 #
 bindkey "^Xt" insert-iso8601-datetime
-bindkey "^Xd" insert-iso8600-date
+bindkey "^Xd" insert-iso8601-date
 bindkey "^Xs" prepend-sudo
 
 function insert-iso8601-date {
@@ -39,3 +48,5 @@ zle -N prepend-sudo
 zle -N insert-iso8601-date
 zle -N insert-iso8601-datetime
 
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
